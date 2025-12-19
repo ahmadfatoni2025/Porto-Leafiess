@@ -28,11 +28,11 @@ const FAQ = () => {
                         initial={{ opacity: 0, y: 20 }}
                         whileInView={{ opacity: 1, y: 0 }}
                         viewport={{ once: true }}
-                        className="text-4xl md:text-5xl font-black tracking-tighter text-black mb-4"
+                        className="text-4xl md:text-5xl font-black tracking-tighter text-white mb-4"
                     >
                         Frequent Questions
                     </motion.h2>
-                    <p className="text-neutral-500 font-medium">Everything you need to know about our process</p>
+                    <p className="text-neutral-400 font-medium">Everything you need to know about our process</p>
                 </div>
 
                 <div className="space-y-4">
@@ -45,11 +45,11 @@ const FAQ = () => {
                             transition={{ delay: index * 0.1 }}
                             className="glass-card p-8 group cursor-pointer"
                         >
-                            <h3 className="font-black text-xl mb-3 flex items-center justify-between">
+                            <h3 className="font-black text-xl mb-3 flex items-center justify-between text-white">
                                 {faq.q}
-                                <span className="text-emerald-500 group-hover:rotate-45 transition-transform duration-300">+</span>
+                                <span className="text-emerald-400 group-hover:rotate-45 transition-transform duration-300">+</span>
                             </h3>
-                            <p className="text-neutral-500 font-medium leading-relaxed">
+                            <p className="text-neutral-400 font-medium leading-relaxed">
                                 {faq.a}
                             </p>
                         </motion.div>

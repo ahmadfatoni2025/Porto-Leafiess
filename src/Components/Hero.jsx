@@ -1,7 +1,6 @@
 // @ts-nocheck
 import { motion } from "framer-motion";
-// import Project1 from "../assets/project1.png";
-// import Project2 from "../assets/project2.png";
+import BlurText from "./icons/BlurText";
 
 const Hero = () => {
     const containerVariants = {
@@ -45,15 +44,15 @@ const Hero = () => {
             {/* Decorative Background Elements */}
             <motion.div
                 initial={{ opacity: 0, scale: 0.8 }}
-                animate={{ opacity: 0.4, scale: 1 }}
+                animate={{ opacity: 0.2, scale: 1 }}
                 transition={{ duration: 2, repeat: Infinity, repeatType: "reverse" }}
-                className="absolute top-1/4 -left-20 w-96 h-96 bg-blue-100 rounded-full blur-[120px] -z-10"
+                className="absolute top-1/4 -left-20 w-96 h-96 bg-blue-900/20 rounded-full blur-[120px] -z-10"
             />
             <motion.div
                 initial={{ opacity: 0, scale: 0.8 }}
-                animate={{ opacity: 0.3, scale: 1.1 }}
+                animate={{ opacity: 0.15, scale: 1.1 }}
                 transition={{ duration: 2.5, repeat: Infinity, repeatType: "reverse", delay: 0.5 }}
-                className="absolute bottom-1/4 -right-20 w-[500px] h-[500px] bg-indigo-50 rounded-full blur-[150px] -z-10"
+                className="absolute bottom-1/4 -right-20 w-[500px] h-[500px] bg-indigo-900/20 rounded-full blur-[150px] -z-10"
             />
 
             {/* Floating Project Images - Left Side */}
@@ -109,17 +108,26 @@ const Hero = () => {
                     Leafiess Portfolio System
                 </motion.span>
 
-                <motion.h1
-                    variants={itemVariants}
-                    className="text-6xl md:text-8xl font-black tracking-tighter text-black mb-8 leading-[0.9]"
-                >
-                    Leafiess portfolio <br />
-                    <span className="text-emerald-700 drop-shadow-emerald-900">All you can find solve here..</span>
-                </motion.h1>
+                <div className="mb-8">
+                    <BlurText
+                        text="Leafiess portfolio"
+                        delay={150}
+                        animateBy="words"
+                        direction="top"
+                        className="text-6xl md:text-8xl font-black tracking-tighter text-white leading-[0.9] justify-center"
+                    />
+                    <BlurText
+                        text="All you can find solve here.."
+                        delay={150}
+                        animateBy="words"
+                        direction="top"
+                        className="text-4xl md:text-6xl font-black tracking-tighter text-emerald-400 drop-shadow-[0_0_20px_rgba(52,211,153,0.3)] leading-[0.9] justify-center mt-4"
+                    />
+                </div>
 
                 <motion.p
                     variants={itemVariants}
-                    className="text-lg md:text-xl text-white mb-10 max-w-2xl mx-auto leading-relaxed"
+                    className="text-lg md:text-xl text-neutral-300 mb-10 max-w-2xl mx-auto leading-relaxed"
                 >
                     A powerful system designed to showcase your projects with elegance. We help you manage, organize, and present your work in the most professional way possible.
                 </motion.p>
@@ -146,13 +154,13 @@ const Hero = () => {
                             />
                         </svg>
                         {/* Shimmer effect */}
-                        <div className="absolute inset-0 translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-1000 bg-gradient-to-r from-transparent via-white/20 to-transparent" />
+                        <div className="absolute inset-0 translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-1000 bg-gradient-to-r from-transparent via-white/10 to-transparent" />
                     </motion.button>
 
                     <motion.button
                         whileHover={{ scale: 1.05 }}
                         whileTap={{ scale: 0.95 }}
-                        className="glass-button-secondary w-full sm:w-auto px-10 py-4 rounded-full text-[15px] cursor-pointer border border-white/40"
+                        className="glass-button-secondary w-full sm:w-auto px-10 py-4 rounded-full text-[15px] cursor-pointer border border-white/10"
                     >
                         Contact us
                     </motion.button>
@@ -161,7 +169,7 @@ const Hero = () => {
                 {/* Floating Stat Labels */}
                 <motion.div
                     variants={itemVariants}
-                    className="mt-20 py-10 glass-card rounded-[2rem] flex flex-wrap justify-center gap-12 text-emerald-950 px-10"
+                    className="mt-20 py-10 glass-card rounded-[2rem] flex flex-wrap justify-center gap-12 text-white px-10"
                 >
                     <motion.div className="flex flex-col items-center">
                         <span className="text-2xl font-black tracking-tighter">15+</span>

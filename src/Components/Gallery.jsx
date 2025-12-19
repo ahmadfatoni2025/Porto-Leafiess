@@ -18,11 +18,11 @@ const Gallery = () => {
                         initial={{ opacity: 0, y: 20 }}
                         whileInView={{ opacity: 1, y: 0 }}
                         viewport={{ once: true }}
-                        className="text-4xl md:text-5xl font-black tracking-tighter text-black mb-4"
+                        className="text-4xl md:text-5xl font-black tracking-tighter text-white mb-4"
                     >
                         Our Gallery
                     </motion.h2>
-                    <p className="text-neutral-500 font-medium">Take a look at our latest creative works</p>
+                    <p className="text-neutral-400 font-medium">Take a look at our latest creative works</p>
                 </div>
 
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">

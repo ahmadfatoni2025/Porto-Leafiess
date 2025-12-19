@@ -8,7 +8,7 @@ const Header = () => {
     { name: "Home", id: "home" },
     { name: "Gallery", id: "gallery" },
     { name: "About", id: "about" },
-    { name: "Project", id: "product" },
+    { name: "Projects", id: "projects" },
     { name: "Pricing", id: "pricing" },
     { name: "FAQs", id: "faqs" },
   ];
@@ -29,7 +29,7 @@ const Header = () => {
         initial={{ y: -40, opacity: 0, scale: 0.95 }}
         animate={{ y: 0, opacity: 1, scale: 1 }}
         transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-        className="bg-white rounded-full flex items-center justify-between px-2 py-2 shadow-[0_8px_30px_rgb(0,0,0,0.04)] border border-neutral-100 w-full max-w-[1000px] backdrop-blur-sm bg-white/90"
+        className="bg-neutral-900/80 rounded-full flex items-center justify-between px-2 py-2 shadow-[0_8px_30px_rgb(0,0,0,0.3)] border border-neutral-800 w-full max-w-[1000px] backdrop-blur-md"
       >
         {/* Logo */}
         <motion.div
@@ -37,7 +37,7 @@ const Header = () => {
           onClick={() => scrollToSection("home")}
           className="pl-6 flex items-center cursor-pointer group"
         >
-          <span className="font-black text-2xl tracking-tighter text-black select-none group-hover:text-neutral-700 transition-colors">
+          <span className="font-black text-2xl tracking-tighter text-white select-none group-hover:text-emerald-400 transition-colors">
             Leafiess
           </span>
         </motion.div>
@@ -57,7 +57,7 @@ const Header = () => {
                   setActiveTab(link.name);
                   scrollToSection(link.id);
                 }}
-                className={`relative z-10 text-[13px] font-semibold transition-colors duration-300 cursor-pointer ${link.name === activeTab ? "text-black" : "text-neutral-500 hover:text-black"
+                className={`relative z-10 text-[13px] font-semibold transition-colors duration-300 cursor-pointer ${link.name === activeTab ? "text-emerald-400" : "text-neutral-400 hover:text-white"
                   }`}
               >
                 {link.name}
@@ -65,7 +65,7 @@ const Header = () => {
 
               {/* Hover Effect Background */}
               <motion.div
-                className="absolute inset-0 z-0 bg-neutral-50 rounded-full opacity-0"
+                className="absolute inset-0 z-0 bg-neutral-800 rounded-full opacity-0"
                 whileHover={{ opacity: 1 }}
                 transition={{ duration: 0.2 }}
               />
@@ -75,7 +75,7 @@ const Header = () => {
                 {activeTab === link.name && (
                   <motion.div
                     layoutId="activeDot"
-                    className="absolute -bottom-1 left-1/2 -translate-x-1/2 w-1 h-1 bg-black rounded-full"
+                    className="absolute -bottom-1 left-1/2 -translate-x-1/2 w-1 h-1 bg-emerald-400 rounded-full"
                     transition={{ type: "spring", stiffness: 380, damping: 30 }}
                   />
                 )}
@@ -95,7 +95,7 @@ const Header = () => {
             whileHover={{ scale: 1.02, backgroundColor: "#065f46" }}
             whileTap={{ scale: 0.98 }}
             onClick={() => scrollToSection("pricing")}
-            className="bg-emerald-800 text-white text-[13px] font-bold px-7 py-3 rounded-full transition-shadow hover:shadow-lg cursor-pointer"
+            className="bg-emerald-600 text-white text-[13px] font-bold px-7 py-3 rounded-full transition-all hover:shadow-[0_0_20px_rgba(16,185,129,0.3)] cursor-pointer"
           >
             Contact
           </motion.button>

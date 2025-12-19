@@ -1,6 +1,7 @@
 // @ts-nocheck
-import { useState, useRef } from "react";
+import { useRef, useState } from 'react';
 import { motion } from "framer-motion";
+import CardSwap, { Card } from './CardSwap';
 
 const CheckIcon = () => (
     <svg
@@ -12,21 +13,77 @@ const CheckIcon = () => (
         strokeWidth="3"
         strokeLinecap="round"
         strokeLinejoin="round"
-        className="text-neutral-900"
+        className="text-emerald-400"
     >
         <polyline points="20 6 9 17 4 12" />
     </svg>
 );
 
-const Product = () => {
-    const [isYearly, setIsYearly] = useState(false);
+const ProductContent = ({ plan }) => (
+    <div className="grid grid-cols-1 md:grid-cols-2 h-full gap-8">
+        <div className="flex flex-col justify-center">
+            <div className="flex items-center gap-3 mb-6">
+                <span className={`px-4 py-1 rounded-full text-[10px] font-black uppercase tracking-[0.2em] border ${plan.isPopular ? 'bg-blue-500/10 text-blue-400 border-blue-500/20' : 'bg-white/5 text-neutral-400 border-white/10'}`}>
+                    {plan.tagline}
+                </span>
+                {plan.isPopular && (
+                    <span className="text-[10px] font-black uppercase tracking-widest text-emerald-400">
+                        🔥 Most Popular
+                    </span>
+                )}
+            </div>
+            <h3 className="text-4xl md:text-5xl font-black text-white tracking-tighter mb-4 leading-none">
+                {plan.name}
+            </h3>
+            <p className="text-neutral-400 text-lg font-medium leading-relaxed mb-8 max-w-sm">
+                {plan.description}
+            </p>
+            <div className="flex items-baseline gap-2 mb-10">
+                <span className="text-neutral-500 text-2xl font-black">Rp</span>
+                <span className="text-5xl md:text-6xl font-black text-white tracking-tighter">
+                    {plan.price}
+                </span>
+            </div>
+            <motion.button
+                whileHover={{ scale: 1.02 }}
+                whileTap={{ scale: 0.98 }}
+                className={`w-fit py-5 px-10 rounded-full text-sm font-black uppercase tracking-widest transition-all duration-300 cursor-pointer ${plan.isPopular
+                    ? "bg-white text-black shadow-xl"
+                    : "bg-neutral-800 text-white hover:bg-neutral-700"
+                    }`}
+            >
+                {plan.buttonText}
+            </motion.button>
+        </div>
+        <div className="bg-white/5 rounded-[2rem] p-8 md:p-10 border border-white/5 flex flex-col justify-center">
+            <div className="flex items-center gap-3 mb-8">
+                <span className="text-[10px] font-black text-neutral-500 uppercase tracking-[0.2em]">Package Services</span>
+                <div className="h-px grow bg-white/10" />
+            </div>
+            <ul className="space-y-4">
+                {plan.features.map((feature, i) => (
+                    <li key={i} className="flex items-start gap-4 group">
+                        <div className="mt-1 flex-shrink-0">
+                            <CheckIcon />
+                        </div>
+                        <span className="text-sm md:text-base text-neutral-300 font-bold tracking-tight leading-tight group-hover:text-white transition-colors">
+                            {feature}
+                        </span>
+                    </li>
+                ))}
+            </ul>
+        </div>
+    </div>
+);
 
+const Product = () => {
     const plans = [
         {
             name: "Paket Basic",
+            tagline: "Entry Level",
             description: "Solusi tepat untuk personal, UMKM, atau bisnis yang baru mulai hadir secara online.",
             price: "1.399.000",
-            buttonText: "You're on Creator",
+            buttonText: "Start Basic",
             features: [
                 "Desain website sederhana dan profesional",
                 "Hingga 3 halaman (Home, Tentang, Kontak)",
@@ -39,9 +96,10 @@ const Product = () => {
         },
         {
             name: "Paket Exclusive",
+            tagline: "High End Solution",
             description: "Untuk brand dan perusahaan yang mengutamakan performa, tampilan premium, dan pengalaman pengguna maksimal.",
             price: "4.899.000",
-            buttonText: "Current Plan",
+            buttonText: "Go Exclusive",
             features: [
                 "Desain eksklusif & modern (custom penuh)",
                 "Halaman tidak terbatas",
@@ -53,13 +111,13 @@ const Product = () => {
                 "Domain & hosting (opsional)"
             ],
             isPopular: true,
-            headerImage: "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=2564&auto=format&fit=crop",
         },
         {
             name: "Paket Professional",
+            tagline: "Business Growth",
             description: "Dirancang untuk bisnis yang ingin tampil lebih meyakinkan dan fungsional..",
             price: "3.299.000",
-            buttonText: "Get Studio",
+            buttonText: "Get Professional",
             features: [
                 "Desain custom sesuai brand",
                 "Hingga 6 halaman",
@@ -75,171 +133,38 @@ const Product = () => {
     ];
 
     return (
-        <section id="pricing" className="py-4 px-6 relative bg-transparent overflow-hidden">
-            {/* Decorative Background Elements */}
-            <motion.div
-                initial={{ opacity: 0, scale: 0.8 }}
-                whileInView={{ opacity: 0.3, scale: 1 }}
-                transition={{ duration: 2, repeat: Infinity, repeatType: "reverse" }}
-                className="absolute top-1/2 -right-20 w-80 h-80 bg-emerald-100 rounded-full blur-[100px] -z-10"
-            />
-            <motion.div
-                initial={{ opacity: 0, scale: 0.8 }}
-                whileInView={{ opacity: 0.2, scale: 1.1 }}
-                transition={{ duration: 2.5, repeat: Infinity, repeatType: "reverse", delay: 0.5 }}
-                className="absolute bottom-0 -left-20 w-96 h-96 bg-blue-100 rounded-full blur-[120px] -z-10"
-            />
-
+        <section id="pricing" className="py-24 px-6 relative bg-transparent overflow-hidden">
             <div className="max-w-7xl mx-auto">
-                {/* Header */}
-                <div className="text-center mb-20">
+                <div className="text-center mb-24">
                     <motion.h2
                         initial={{ opacity: 0, y: 20 }}
                         whileInView={{ opacity: 1, y: 0 }}
                         viewport={{ once: true }}
-                        transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-                        className="text-4xl md:text-5xl font-black tracking-tighter text-emerald-950 mb-10"
+                        className="text-4xl md:text-5xl font-black tracking-tighter text-white mb-4"
                     >
-                        Choose your plan
+                        Choice your best plans
                     </motion.h2>
-
-                    {/* Toggle */}
-                    <motion.div
-                        initial={{ opacity: 0, scale: 0.95 }}
-                        whileInView={{ opacity: 1, scale: 1 }}
-                        viewport={{ once: true }}
-                        transition={{ delay: 0.2, duration: 0.8 }}
-                        className="inline-flex items-center p-1.5 bg-neutral-100 rounded-full border border-neutral-200 shadow-sm"
-                    >
-                        <button
-                            onClick={() => setIsYearly(false)}
-                            className={`px-8 py-2.5 rounded-full text-[13px] font-bold transition-all duration-300 cursor-pointer ${!isYearly
-                                ? "bg-white text-black shadow-[0_2px_10px_rgba(0,0,0,0.05)]"
-                                : "text-neutral-500 hover:text-black"
-                                }`}
-                        >
-                            Pay monthly
-                        </button>
-                        <button
-                            onClick={() => setIsYearly(true)}
-                            className={`px-8 py-2.5 rounded-full text-[13px] font-bold transition-all duration-300 flex items-center gap-2 cursor-pointer ${isYearly
-                                ? "bg-white text-black shadow-[0_2px_10px_rgba(0,0,0,0.05)]"
-                                : "text-neutral-500 hover:text-black"
-                                }`}
-                        >
-                            Pay yearly
-                            <span className="w-1.5 h-1.5 bg-green-500 rounded-full"></span>
-                        </button>
-                    </motion.div>
+                    <p className="text-neutral-400 font-medium max-w-2xl mx-auto">
+                        Pilih paket yang paling sesuai dengan kebutuhan bisnis Anda. Tidak ada biaya tersembunyi.
+                    </p>
                 </div>
 
-                {/* Pricing Cards Grid */}
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-8 items-stretch pt-4">
-                    {plans.map((plan, index) => {
-                        const cardRef = useRef(null);
-                        const [position, setPosition] = useState({ x: 0, y: 0 });
-                        const [opacity, setOpacity] = useState(0);
-
-                        const handleMouseMove = (e) => {
-                            if (!cardRef.current) return;
-                            const rect = cardRef.current.getBoundingClientRect();
-                            setPosition({ x: e.clientX - rect.left, y: e.clientY - rect.top });
-                        };
-
-                        return (
-                            <motion.div
+                <div style={{ height: '650px', position: 'relative' }} className="mt-10">
+                    <CardSwap
+                        cardDistance={60}
+                        verticalDistance={30}
+                        delay={5000}
+                        pauseOnHover={true}
+                    >
+                        {plans.map((plan, index) => (
+                            <Card
                                 key={plan.name}
-                                ref={cardRef}
-                                onMouseMove={handleMouseMove}
-                                onMouseEnter={() => setOpacity(0.6)}
-                                onMouseLeave={() => setOpacity(0)}
-                                initial={{ opacity: 0, y: 40 }}
-                                whileInView={{ opacity: 1, y: 0 }}
-                                viewport={{ once: true }}
-                                transition={{ duration: 0.8, delay: index * 0.1, ease: [0.16, 1, 0.3, 1] }}
-                                whileHover={{ y: -8, transition: { duration: 0.3 } }}
-                                className={`relative glass-card rounded-[2.5rem] overflow-hidden flex flex-col ${plan.isPopular ? "md:scale-105 z-10 shadow-[0_40px_80px_rgba(0,0,0,0.1)]" : "shadow-[0_20px_50px_rgba(0,0,0,0.03)]"
-                                    }`}
+                                className={plan.isPopular ? "bg-neutral-900 border border-blue-500/20" : "bg-neutral-900/80 border border-white/5"}
                             >
-                                {/* Spotlight Effect Layer */}
-                                <div
-                                    className="pointer-events-none absolute inset-0 transition-opacity duration-500 ease-in-out"
-                                    style={{
-                                        opacity,
-                                        background: `radial-gradient(circle at ${position.x}px ${position.y}px, rgba(0, 229, 255, 0.15), transparent 80%)`,
-                                    }}
-                                />
-
-                                {/* Header for Popular Card */}
-                                {plan.isPopular ? (
-                                    <div className="relative h-24 overflow-hidden">
-                                        <img
-                                            src={plan.headerImage}
-                                            alt="header"
-                                            className="w-full h-full object-cover"
-                                        />
-                                        <div className="absolute inset-0 bg-black/40 backdrop-blur-[2px] flex items-center px-8">
-                                            <h3 className="text-xl font-bold text-white tracking-tight">
-                                                {plan.name}
-                                            </h3>
-                                        </div>
-                                    </div>
-                                ) : (
-                                    <div className="pt-8 px-8 pb-4">
-                                        <h3 className="text-xl font-bold text-neutral-900 tracking-tight">
-                                            {plan.name}
-                                        </h3>
-                                    </div>
-                                )}
-
-                                {/* Card Content */}
-                                <div className="p-8 flex flex-col flex-grow">
-                                    <p className="text-sm text-neutral-500 font-medium leading-[1.6] mb-8 min-h-[44px]">
-                                        {plan.description}
-                                    </p>
-
-                                    {/* Pricing Box */}
-                                    <div className="pricing">
-                                        <div className="flex items-baseline gap-1.5">
-                                            <span className="text-4xl font-black text-neutral-900 tracking-tighter">
-                                                Rp{plan.price}
-                                            </span>
-
-                                        </div>
-
-                                        <motion.button
-                                            whileHover={{ scale: 1.02 }}
-                                            whileTap={{ scale: 0.98 }}
-                                            className={`w-full mt-6 py-4 px-6 rounded-full text-[13px] font-bold transition-all duration-300 cursor-pointer ${plan.name === "Studio"
-                                                ? "bg-black text-white hover:bg-neutral-800 shadow-lg shadow-black/10"
-                                                : "bg-neutral-200/50 text-neutral-600 hover:bg-neutral-200"
-                                                }`}
-                                        >
-                                            {plan.buttonText}
-                                        </motion.button>
-                                    </div>
-
-                                    {/* Features List */}
-                                    <ul className="space-y-4.5 mt-auto">
-                                        {plan.features.map((feature, i) => (
-                                            <li key={i} className="flex items-start gap-4 group">
-                                                <motion.div
-                                                    initial={{ scale: 0.8 }}
-                                                    whileInView={{ scale: 1 }}
-                                                    className="mt-1 flex-shrink-0"
-                                                >
-                                                    <CheckIcon />
-                                                </motion.div>
-                                                <span className="text-[13px] text-neutral-600 font-bold tracking-tight leading-tight group-hover:text-black transition-colors">
-                                                    {feature}
-                                                </span>
-                                            </li>
-                                        ))}
-                                    </ul>
-                                </div>
-                            </motion.div>
-                        );
-                    })}
+                                <ProductContent plan={plan} />
+                            </Card>
+                        ))}
+                    </CardSwap>
                 </div>
             </div>
         </section>
