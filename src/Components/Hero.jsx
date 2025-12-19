@@ -127,14 +127,33 @@ const Hero = () => {
                     <motion.button
                         whileHover={{ scale: 1.05 }}
                         whileTap={{ scale: 0.95 }}
-                        className="w-full sm:w-auto bg-emerald-600 hover:bg-emerald-700 text-white px-10 py-4 rounded-full font-bold text-[15px] hover:shadow-[0_20px_50px_rgba(0,0,0,0.2)] transition-shadow cursor-pointer"
+                        className="w-full sm:w-auto bg-emerald-600 hover:bg-emerald-700
+             text-white px-12 py-4 rounded-full font-bold text-[15px]
+             hover:shadow-[0_20px_50px_rgba(0,0,0,0.2)]
+             transition-shadow cursor-pointer
+             flex items-center gap-3"
                     >
-                        See all project
+                        <span>Explore</span>
+                        <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            fill="none"
+                            viewBox="0 0 24 24"
+                            strokeWidth={3}
+                            stroke="currentColor"
+                            className="size-4"
+                        >
+                            <path
+                                strokeLinecap="round"
+                                strokeLinejoin="round"
+                                d="m4.5 19.5 15-15m0 0H8.25m11.25 0v11.25"
+                            />
+                        </svg>
                     </motion.button>
+
                     <motion.button
                         whileHover={{ backgroundColor: "rgba(0,0,0,0.05)", scale: 1.05 }}
                         whileTap={{ scale: 0.95 }}
-                        className="w-full sm:w-auto px-10 py-4 rounded-full font-bold text-[15px] text-white border border-emerald-900 bg-emerald-600/20 hover:bg-emerald-600/40 transition-colors cursor-pointer"
+                        className="w-full sm:w-auto px-10 py-4 rounded-full font-bold text-[15px] text-emerald-950 border border-emerald-900 bg-emerald-600/20 hover:bg-emerald-600/40 transition-colors cursor-pointer"
                     >
                         Contact us
                     </motion.button>
@@ -143,20 +162,20 @@ const Hero = () => {
                 {/* Floating Stat Labels */}
                 <motion.div
                     variants={itemVariants}
-                    className="mt-20 pt-10 border-t border-neutral-100 flex flex-wrap justify-center gap-12 text-neutral-400"
+                    className="mt-20 pt-10 border-t border-neutral-100 flex flex-wrap justify-center gap-12 text-emerald-950"
                 >
-                    <div className="flex flex-col items-center">
-                        <span className="text-2xl font-bold text-white">15+</span>
+                    <motion.div className="flex flex-col items-center">
+                        <span className="text-2xl font-bold">15+</span>
                         <span className="text-[10px] uppercase tracking-widest font-bold">Active Systems</span>
-                    </div>
-                    <div className="flex flex-col items-center">
-                        <span className="text-2xl font-bold text-white">4.9/5</span>
+                    </motion.div>
+                    <motion.div className="flex flex-col items-center">
+                        <span className="text-2xl font-bold">4.9/5</span>
                         <span className="text-[10px] uppercase tracking-widest font-bold">Success Rate</span>
-                    </div>
-                    <div className="flex flex-col items-center">
-                        <span className="text-2xl font-bold text-white">100%</span>
+                    </motion.div>
+                    <motion.div className="flex flex-col items-center">
+                        <span className="text-2xl font-bold">100%</span>
                         <span className="text-[10px] uppercase tracking-widest font-bold">Satisfied Clients</span>
-                    </div>
+                    </motion.div>
                 </motion.div>
             </motion.div>
         </section>

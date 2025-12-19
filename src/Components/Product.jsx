@@ -22,52 +22,59 @@ const Product = () => {
 
     const plans = [
         {
-            name: "Free",
-            description: "Perfect for hobbyists, students, or early-stage creators.",
-            price: 0,
+            name: "Paket Basic",
+            description: "Solusi tepat untuk personal, UMKM, atau bisnis yang baru mulai hadir secara online.",
+            price: "1.399.000",
             buttonText: "You're on Creator",
             features: [
-                "Access to a basic asset library",
-                "15-second video animation",
-                "Generate up to 10 scenes/month",
-                "Watermarked exports",
-                "Try basic AI prompts",
+                "Desain website sederhana dan profesional",
+                "Hingga 3 halaman (Home, Tentang, Kontak)",
+                "Mobile responsive",
+                "Integrasi WhatsApp",
+                "Gratis revisi ringan",
+                "Domain & hosting (opsional)",
             ],
             isPopular: false,
         },
         {
-            name: "Creator",
-            description: "For indie creators, and startups who need high-quality output",
-            price: isYearly ? 16 : 20,
+            name: "Paket Exclusive",
+            description: "Untuk brand dan perusahaan yang mengutamakan performa, tampilan premium, dan pengalaman pengguna maksimal.",
+            price: "4.899.000",
             buttonText: "Current Plan",
             features: [
-                "Everything in Free",
-                "Unlimited 3D scene generation",
-                "Premium asset library access",
-                "Animations up to 30 seconds",
-                "20+ Video AI models",
+                "Desain eksklusif & modern (custom penuh)",
+                "Halaman tidak terbatas",
+                "UI/UX lebih optimal",
+                "Optimasi kecepatan & SEO dasar",
+                "Integrasi API / fitur khusus",
+                "Admin panel (jika diperlukan)",
+                "Revisi fleksibel",
+                "Domain & hosting (opsional)"
             ],
             isPopular: true,
             headerImage: "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=2564&auto=format&fit=crop",
         },
         {
-            name: "Studio",
-            description: "For teams and studios that need power, speed.",
-            price: isYearly ? 32 : 40,
+            name: "Paket Professional",
+            description: "Dirancang untuk bisnis yang ingin tampil lebih meyakinkan dan fungsional..",
+            price: "3.299.000",
             buttonText: "Get Studio",
             features: [
-                "Everything in Creator",
-                "Unlimited 3D scene generation",
-                "Full access to premium asset library",
-                "Animations up to 60 seconds",
-                "Unlimited Video AI models",
+                "Desain custom sesuai brand",
+                "Hingga 6 halaman",
+                "Mobile & tablet responsive",
+                "Optimasi kecepatan dasar",
+                "Integrasi WhatsApp & Google Maps",
+                "Form kontak aktif",
+                "Revisi menengah",
+                "Domain & hosting (opsional)"
             ],
             isPopular: false,
         },
     ];
 
     return (
-        <section id="pricing" className="py-32 px-6 relative bg-transparent overflow-hidden">
+        <section id="pricing" className="py-4 px-6 relative bg-transparent overflow-hidden">
             {/* Decorative Background Elements */}
             <motion.div
                 initial={{ opacity: 0, scale: 0.8 }}
@@ -90,7 +97,7 @@ const Product = () => {
                         whileInView={{ opacity: 1, y: 0 }}
                         viewport={{ once: true }}
                         transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-                        className="text-4xl md:text-5xl font-black tracking-tighter text-black mb-8"
+                        className="text-4xl md:text-5xl font-black tracking-tighter text-emerald-950 mb-10"
                     >
                         Choose your plan
                     </motion.h2>
@@ -135,7 +142,7 @@ const Product = () => {
                             viewport={{ once: true }}
                             transition={{ duration: 0.8, delay: index * 0.1, ease: [0.16, 1, 0.3, 1] }}
                             whileHover={{ y: -8, transition: { duration: 0.3 } }}
-                            className={`relative bg-white rounded-[2.5rem] overflow-hidden shadow-[0_20px_50px_rgba(0,0,0,0.03)] border border-neutral-100 flex flex-col ${plan.isPopular ? "md:scale-105 z-10 shadow-[0_40px_80px_rgba(0,0,0,0.08)]" : ""
+                            className={`relative glass-card rounded-[2.5rem] overflow-hidden flex flex-col ${plan.isPopular ? "md:scale-105 z-10 shadow-[0_40px_80px_rgba(0,0,0,0.1)]" : "shadow-[0_20px_50px_rgba(0,0,0,0.03)]"
                                 }`}
                         >
                             {/* Header for Popular Card */}
@@ -167,19 +174,12 @@ const Product = () => {
                                 </p>
 
                                 {/* Pricing Box */}
-                                <div className="bg-neutral-50 rounded-2xl p-6 mb-8 border border-neutral-100 transition-colors hover:border-neutral-200">
+                                <div className="pricing">
                                     <div className="flex items-baseline gap-1.5">
                                         <span className="text-4xl font-black text-neutral-900 tracking-tighter">
-                                            ${plan.price}
+                                            Rp{plan.price}
                                         </span>
-                                        <div className="flex flex-col -mb-1">
-                                            <span className="text-[10px] font-black text-neutral-400 uppercase tracking-widest leading-none">
-                                                USD /
-                                            </span>
-                                            <span className="text-[10px] font-black text-neutral-400 uppercase tracking-widest leading-none mt-0.5">
-                                                month
-                                            </span>
-                                        </div>
+
                                     </div>
 
                                     <motion.button

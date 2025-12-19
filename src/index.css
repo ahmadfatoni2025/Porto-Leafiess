@@ -8,7 +8,7 @@
         position: relative;
         min-height: 100vh;
 
-        background-image: url("./assets/Background.jpg");
+        background-image: url("https://i.pinimg.com/736x/f5/38/55/f5385521fbb4b2a1f4b326c186097c58.jpg");
         background-size: cover;
         background-position: center;
     }
@@ -23,4 +23,32 @@
 
         z-index: -1;
     }
+
+}
+
+.pricing {
+    background: rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    @apply rounded-3xl p-6 mb-8 transition-all duration-300;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+}
+
+.pricing:hover {
+    background: rgba(255, 255, 255, 0.3);
+    border: 1px solid rgba(255, 255, 255, 0.4);
+}
+
+.glass-card {
+    background: rgba(255, 255, 255, 0.7);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    @apply transition-all duration-500;
+}
+
+.glass-card:hover {
+    background: rgba(255, 255, 255, 0.8);
+    border: 1px solid rgba(255, 255, 255, 0.6);
 }
