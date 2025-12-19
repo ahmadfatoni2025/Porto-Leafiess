@@ -80,10 +80,10 @@ const Product = () => {
     const plans = [
         {
             name: "Paket Basic",
-            tagline: "Entry Level",
+            tagline: "Start your journey",
             description: "Solusi tepat untuk personal, UMKM, atau bisnis yang baru mulai hadir secara online.",
             price: "1.399.000",
-            buttonText: "Start Basic",
+            buttonText: "Get Started",
             features: [
                 "Desain website sederhana dan profesional",
                 "Hingga 3 halaman (Home, Tentang, Kontak)",
@@ -93,13 +93,14 @@ const Product = () => {
                 "Domain & hosting (opsional)",
             ],
             isPopular: false,
+            color: "emerald"
         },
         {
             name: "Paket Exclusive",
-            tagline: "High End Solution",
+            tagline: "Unmatched performance",
             description: "Untuk brand dan perusahaan yang mengutamakan performa, tampilan premium, dan pengalaman pengguna maksimal.",
             price: "4.899.000",
-            buttonText: "Go Exclusive",
+            buttonText: "Choose Exclusive",
             features: [
                 "Desain eksklusif & modern (custom penuh)",
                 "Halaman tidak terbatas",
@@ -111,13 +112,14 @@ const Product = () => {
                 "Domain & hosting (opsional)"
             ],
             isPopular: true,
+            color: "blue"
         },
         {
             name: "Paket Professional",
-            tagline: "Business Growth",
+            tagline: "Scale your business",
             description: "Dirancang untuk bisnis yang ingin tampil lebih meyakinkan dan fungsional..",
             price: "3.299.000",
-            buttonText: "Get Professional",
+            buttonText: "Try Professional",
             features: [
                 "Desain custom sesuai brand",
                 "Hingga 6 halaman",
@@ -129,13 +131,28 @@ const Product = () => {
                 "Domain & hosting (opsional)"
             ],
             isPopular: false,
+            color: "purple"
         },
     ];
 
     return (
         <section id="pricing" className="py-24 px-6 relative bg-transparent overflow-hidden">
+            {/* Decorative Background Elements */}
+            <motion.div
+                initial={{ opacity: 0, scale: 0.8 }}
+                whileInView={{ opacity: 0.2, scale: 1 }}
+                transition={{ duration: 2, repeat: Infinity, repeatType: "reverse" }}
+                className="absolute top-1/2 -right-20 w-80 h-80 bg-emerald-900 rounded-full blur-[100px] -z-10"
+            />
+            <motion.div
+                initial={{ opacity: 0, scale: 0.8 }}
+                whileInView={{ opacity: 0.15, scale: 1.1 }}
+                transition={{ duration: 2.5, repeat: Infinity, repeatType: "reverse", delay: 0.5 }}
+                className="absolute bottom-0 -left-20 w-96 h-96 bg-blue-900 rounded-full blur-[120px] -z-10"
+            />
+
             <div className="max-w-7xl mx-auto">
-                <div className="text-center mb-24">
+                <div className="text-center mb-20">
                     <motion.h2
                         initial={{ opacity: 0, y: 20 }}
                         whileInView={{ opacity: 1, y: 0 }}
@@ -149,22 +166,83 @@ const Product = () => {
                     </p>
                 </div>
 
-                <div style={{ height: '650px', position: 'relative' }} className="mt-10">
-                    <CardSwap
-                        cardDistance={60}
-                        verticalDistance={30}
-                        delay={5000}
-                        pauseOnHover={true}
-                    >
-                        {plans.map((plan, index) => (
-                            <Card
-                                key={plan.name}
-                                className={plan.isPopular ? "bg-neutral-900 border border-blue-500/20" : "bg-neutral-900/80 border border-white/5"}
-                            >
-                                <ProductContent plan={plan} />
-                            </Card>
-                        ))}
-                    </CardSwap>
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-8 items-stretch mt-10">
+                    {plans.map((plan, index) => (
+                        <motion.div
+                            key={plan.name}
+                            initial={{ opacity: 0, y: 30 }}
+                            whileInView={{ opacity: 1, y: 0 }}
+                            viewport={{ once: true }}
+                            transition={{ delay: index * 0.1, duration: 0.5 }}
+                            className={plan.isPopular ? "md:-mt-4 md:mb-4 lg:-mt-8 lg:mb-8" : ""}
+                        >
+                            <div className={`relative rounded-[2.5rem] overflow-hidden flex flex-col h-full border ${plan.isPopular ? 'bg-neutral-900 border-blue-500/30' : 'bg-neutral-900/60 border-white/5'}`}>
+                                <div className="p-8 md:p-10 flex flex-col h-full relative overflow-hidden">
+                                    {plan.isPopular && (
+                                        <div className="absolute top-0 right-0 w-32 h-32 bg-blue-600/10 blur-[50px] rounded-full -mr-10 -mt-10" />
+                                    )}
+
+                                    <div className="mb-8">
+                                        <div className="flex flex-wrap items-center gap-3 mb-6">
+                                            <span className={`px-3 py-1 rounded-full text-[9px] font-black uppercase tracking-[0.2em] border ${plan.isPopular ? 'bg-blue-500/10 text-blue-400 border-blue-500/20' : 'bg-white/5 text-neutral-400 border-white/10'}`}>
+                                                {plan.tagline}
+                                            </span>
+                                            {plan.isPopular && (
+                                                <span className="text-[9px] font-black uppercase tracking-widest text-emerald-400">
+                                                    🔥 Popular
+                                                </span>
+                                            )}
+                                        </div>
+                                        <h3 className="text-3xl font-black text-white tracking-tighter mb-4">
+                                            {plan.name}
+                                        </h3>
+                                        <p className="text-neutral-400 text-sm font-medium leading-relaxed">
+                                            {plan.description}
+                                        </p>
+                                    </div>
+
+                                    <div className="mb-10">
+                                        <div className="flex items-baseline gap-1.5">
+                                            <span className="text-neutral-500 text-xl font-black">Rp</span>
+                                            <span className="text-4xl md:text-5xl font-black text-white tracking-tighter">
+                                                {plan.price}
+                                            </span>
+                                        </div>
+                                    </div>
+
+                                    <div className="grow mb-10">
+                                        <div className="flex items-center gap-3 mb-6">
+                                            <span className="text-[10px] font-black text-neutral-500 uppercase tracking-[0.2em]">Features</span>
+                                            <div className="h-px grow bg-white/5" />
+                                        </div>
+                                        <ul className="space-y-4">
+                                            {plan.features.map((feature, i) => (
+                                                <li key={i} className="flex items-start gap-3 group">
+                                                    <div className="mt-1 flex-shrink-0">
+                                                        <CheckIcon />
+                                                    </div>
+                                                    <span className="text-sm text-neutral-300 font-bold tracking-tight leading-tight group-hover:text-white transition-colors">
+                                                        {feature}
+                                                    </span>
+                                                </li>
+                                            ))}
+                                        </ul>
+                                    </div>
+
+                                    <motion.button
+                                        whileHover={{ scale: 1.02 }}
+                                        whileTap={{ scale: 0.98 }}
+                                        className={`w-full py-4 rounded-2xl text-xs font-black uppercase tracking-widest transition-all duration-300 cursor-pointer ${plan.isPopular
+                                            ? "bg-blue-600 text-white shadow-lg shadow-blue-500/20 hover:bg-blue-500"
+                                            : "bg-neutral-800 text-white hover:bg-neutral-700"
+                                            }`}
+                                    >
+                                        {plan.buttonText}
+                                    </motion.button>
+                                </div>
+                            </div>
+                        </motion.div>
+                    ))}
                 </div>
             </div>
         </section>
