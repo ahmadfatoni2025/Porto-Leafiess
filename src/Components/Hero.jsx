@@ -1,3 +1,4 @@
+// @ts-nocheck
 import { motion } from "framer-motion";
 // import Project1 from "../assets/project1.png";
 // import Project2 from "../assets/project2.png";
@@ -161,7 +162,7 @@ const Hero = () => {
 
                 {/* Floating Stat Labels */}
                 <motion.div
-                    variant s={itemVariants}
+                    variants={itemVariants}
                     className="mt-20 pt-10 border-t border-neutral-100 flex flex-wrap justify-center gap-12 text-emerald-950"
                 >
                     <motion.div className="flex flex-col items-center">

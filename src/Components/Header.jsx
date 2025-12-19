@@ -6,7 +6,7 @@ const Header = () => {
 
   const navLinks = [
     { name: "Start Here" },
-    { name: "Galery" },
+    { name: "Gallery" },
     { name: "Process" },
     { name: "Compare" },
     { name: "Pricing" },
