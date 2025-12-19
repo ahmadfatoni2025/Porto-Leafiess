@@ -41,7 +41,7 @@ const Hero = () => {
     });
 
     return (
-        <section className="relative min-h-screen flex items-center justify-center overflow-hidden pt-32 pb-20">
+        <section id="home" className="relative min-h-screen flex items-center justify-center overflow-hidden pt-32 pb-20">
             {/* Decorative Background Elements */}
             <motion.div
                 initial={{ opacity: 0, scale: 0.8 }}
@@ -104,7 +104,7 @@ const Hero = () => {
             >
                 <motion.span
                     variants={itemVariants}
-                    className="inline-block px-4 py-1.5 mb-6 text-[11px] font-bold tracking-[0.2em] uppercase bg-neutral-100 text-neutral-500 rounded-full"
+                    className="glass-tag mb-6 inline-block"
                 >
                     Leafiess Portfolio System
                 </motion.span>
@@ -128,20 +128,16 @@ const Hero = () => {
                     <motion.button
                         whileHover={{ scale: 1.05 }}
                         whileTap={{ scale: 0.95 }}
-                        className="w-full sm:w-auto bg-emerald-600 hover:bg-emerald-700
-             text-white px-12 py-4 rounded-full font-bold text-[15px]
-             hover:shadow-[0_20px_50px_rgba(0,0,0,0.2)]
-             transition-shadow cursor-pointer
-             flex items-center gap-3"
+                        className="glass-button-primary w-full sm:w-auto px-12 py-4 rounded-full text-[15px] cursor-pointer flex items-center justify-center gap-3 overflow-hidden relative group"
                     >
-                        <span>Explore</span>
+                        <span className="relative z-10">Explore</span>
                         <svg
                             xmlns="http://www.w3.org/2000/svg"
                             fill="none"
                             viewBox="0 0 24 24"
                             strokeWidth={3}
                             stroke="currentColor"
-                            className="size-4"
+                            className="size-4 relative z-10 transition-transform duration-300 group-hover:translate-x-1"
                         >
                             <path
                                 strokeLinecap="round"
@@ -149,12 +145,14 @@ const Hero = () => {
                                 d="m4.5 19.5 15-15m0 0H8.25m11.25 0v11.25"
                             />
                         </svg>
+                        {/* Shimmer effect */}
+                        <div className="absolute inset-0 translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-1000 bg-gradient-to-r from-transparent via-white/20 to-transparent" />
                     </motion.button>
 
                     <motion.button
-                        whileHover={{ backgroundColor: "rgba(0,0,0,0.05)", scale: 1.05 }}
+                        whileHover={{ scale: 1.05 }}
                         whileTap={{ scale: 0.95 }}
-                        className="w-full sm:w-auto px-10 py-4 rounded-full font-bold text-[15px] text-emerald-950 border border-emerald-900 bg-emerald-600/20 hover:bg-emerald-600/40 transition-colors cursor-pointer"
+                        className="glass-button-secondary w-full sm:w-auto px-10 py-4 rounded-full text-[15px] cursor-pointer border border-white/40"
                     >
                         Contact us
                     </motion.button>
@@ -163,19 +161,19 @@ const Hero = () => {
                 {/* Floating Stat Labels */}
                 <motion.div
                     variants={itemVariants}
-                    className="mt-20 pt-10 border-t border-neutral-100 flex flex-wrap justify-center gap-12 text-emerald-950"
+                    className="mt-20 py-10 glass-card rounded-[2rem] flex flex-wrap justify-center gap-12 text-emerald-950 px-10"
                 >
                     <motion.div className="flex flex-col items-center">
-                        <span className="text-2xl font-bold">15+</span>
-                        <span className="text-[10px] uppercase tracking-widest font-bold">Active Systems</span>
+                        <span className="text-2xl font-black tracking-tighter">15+</span>
+                        <span className="text-[10px] uppercase tracking-[0.2em] font-bold opacity-60">Active Systems</span>
                     </motion.div>
                     <motion.div className="flex flex-col items-center">
-                        <span className="text-2xl font-bold">4.9/5</span>
-                        <span className="text-[10px] uppercase tracking-widest font-bold">Success Rate</span>
+                        <span className="text-2xl font-black tracking-tighter">4.9/5</span>
+                        <span className="text-[10px] uppercase tracking-[0.2em] font-bold opacity-60">Success Rate</span>
                     </motion.div>
                     <motion.div className="flex flex-col items-center">
-                        <span className="text-2xl font-bold">100%</span>
-                        <span className="text-[10px] uppercase tracking-widest font-bold">Satisfied Clients</span>
+                        <span className="text-2xl font-black tracking-tighter">100%</span>
+                        <span className="text-[10px] uppercase tracking-[0.2em] font-bold opacity-60">Satisfied Clients</span>
                     </motion.div>
                 </motion.div>
             </motion.div>

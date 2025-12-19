@@ -2,16 +2,26 @@ import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 
 const Header = () => {
-  const [activeTab, setActiveTab] = useState("Start Here");
+  const [activeTab, setActiveTab] = useState("Home");
 
   const navLinks = [
-    { name: "Start Here" },
-    { name: "Gallery" },
-    { name: "Process" },
-    { name: "Compare" },
-    { name: "Pricing" },
-    { name: "FAQs" },
+    { name: "Home", id: "home" },
+    { name: "Gallery", id: "gallery" },
+    { name: "About", id: "about" },
+    { name: "Project", id: "product" },
+    { name: "Pricing", id: "pricing" },
+    { name: "FAQs", id: "faqs" },
   ];
+
+  /**
+   * @param {string} id
+   */
+  const scrollToSection = (id) => {
+    const element = document.getElementById(id);
+    if (element) {
+      element.scrollIntoView({ behavior: "smooth" });
+    }
+  };
 
   return (
     <header className="fixed top-6 left-0 right-0 z-50 flex justify-center px-4">
@@ -19,15 +29,16 @@ const Header = () => {
         initial={{ y: -40, opacity: 0, scale: 0.95 }}
         animate={{ y: 0, opacity: 1, scale: 1 }}
         transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-        className="bg-white rounded-full flex items-center justify-between px-2 py-2 shadow-[0_8px_30px_rgb(0,0,0,0.04)] border border-neutral-100 w-full max-w-[900px] backdrop-blur-sm bg-white/90"
+        className="bg-white rounded-full flex items-center justify-between px-2 py-2 shadow-[0_8px_30px_rgb(0,0,0,0.04)] border border-neutral-100 w-full max-w-[1000px] backdrop-blur-sm bg-white/90"
       >
         {/* Logo */}
         <motion.div
           whileHover={{ scale: 1.05 }}
+          onClick={() => scrollToSection("home")}
           className="pl-6 flex items-center cursor-pointer group"
         >
           <span className="font-black text-2xl tracking-tighter text-black select-none group-hover:text-neutral-700 transition-colors">
-            looo
+            Leafiess
           </span>
         </motion.div>
 
@@ -44,11 +55,9 @@ const Header = () => {
               <button
                 onClick={() => {
                   setActiveTab(link.name);
-                  if (link.name === "Pricing") {
-                    document.getElementById("pricing")?.scrollIntoView({ behavior: "smooth" });
-                  }
+                  scrollToSection(link.id);
                 }}
-                className={`relative z-10 text-[13px] font-semibold transition-colors duration-300 cursor-pointer ${activeTab === link.name ? "text-black" : "text-neutral-500 hover:text-black"
+                className={`relative z-10 text-[13px] font-semibold transition-colors duration-300 cursor-pointer ${link.name === activeTab ? "text-black" : "text-neutral-500 hover:text-black"
                   }`}
               >
                 {link.name}
@@ -83,14 +92,15 @@ const Header = () => {
           className="pr-1"
         >
           <motion.button
-            whileHover={{ scale: 1.02, backgroundColor: "#262626" }}
+            whileHover={{ scale: 1.02, backgroundColor: "#065f46" }}
             whileTap={{ scale: 0.98 }}
-            onClick={() => document.getElementById("pricing")?.scrollIntoView({ behavior: "smooth" })}
-            className="bg-black text-white text-[13px] font-bold px-7 py-3 rounded-full transition-shadow hover:shadow-lg cursor-pointer"
+            onClick={() => scrollToSection("pricing")}
+            className="bg-emerald-800 text-white text-[13px] font-bold px-7 py-3 rounded-full transition-shadow hover:shadow-lg cursor-pointer"
           >
-            View Plans
+            Contact
           </motion.button>
         </motion.div>
+
       </motion.nav>
     </header>
   );

@@ -1,4 +1,5 @@
-import { useState } from "react";
+// @ts-nocheck
+import { useState, useRef } from "react";
 import { motion } from "framer-motion";
 
 const CheckIcon = () => (
@@ -134,86 +135,111 @@ const Product = () => {
 
                 {/* Pricing Cards Grid */}
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-8 items-stretch pt-4">
-                    {plans.map((plan, index) => (
-                        <motion.div
-                            key={plan.name}
-                            initial={{ opacity: 0, y: 40 }}
-                            whileInView={{ opacity: 1, y: 0 }}
-                            viewport={{ once: true }}
-                            transition={{ duration: 0.8, delay: index * 0.1, ease: [0.16, 1, 0.3, 1] }}
-                            whileHover={{ y: -8, transition: { duration: 0.3 } }}
-                            className={`relative glass-card rounded-[2.5rem] overflow-hidden flex flex-col ${plan.isPopular ? "md:scale-105 z-10 shadow-[0_40px_80px_rgba(0,0,0,0.1)]" : "shadow-[0_20px_50px_rgba(0,0,0,0.03)]"
-                                }`}
-                        >
-                            {/* Header for Popular Card */}
-                            {plan.isPopular ? (
-                                <div className="relative h-24 overflow-hidden">
-                                    <img
-                                        src={plan.headerImage}
-                                        alt="header"
-                                        className="w-full h-full object-cover"
-                                    />
-                                    <div className="absolute inset-0 bg-black/40 backdrop-blur-[2px] flex items-center px-8">
-                                        <h3 className="text-xl font-bold text-white tracking-tight">
+                    {plans.map((plan, index) => {
+                        const cardRef = useRef(null);
+                        const [position, setPosition] = useState({ x: 0, y: 0 });
+                        const [opacity, setOpacity] = useState(0);
+
+                        const handleMouseMove = (e) => {
+                            if (!cardRef.current) return;
+                            const rect = cardRef.current.getBoundingClientRect();
+                            setPosition({ x: e.clientX - rect.left, y: e.clientY - rect.top });
+                        };
+
+                        return (
+                            <motion.div
+                                key={plan.name}
+                                ref={cardRef}
+                                onMouseMove={handleMouseMove}
+                                onMouseEnter={() => setOpacity(0.6)}
+                                onMouseLeave={() => setOpacity(0)}
+                                initial={{ opacity: 0, y: 40 }}
+                                whileInView={{ opacity: 1, y: 0 }}
+                                viewport={{ once: true }}
+                                transition={{ duration: 0.8, delay: index * 0.1, ease: [0.16, 1, 0.3, 1] }}
+                                whileHover={{ y: -8, transition: { duration: 0.3 } }}
+                                className={`relative glass-card rounded-[2.5rem] overflow-hidden flex flex-col ${plan.isPopular ? "md:scale-105 z-10 shadow-[0_40px_80px_rgba(0,0,0,0.1)]" : "shadow-[0_20px_50px_rgba(0,0,0,0.03)]"
+                                    }`}
+                            >
+                                {/* Spotlight Effect Layer */}
+                                <div
+                                    className="pointer-events-none absolute inset-0 transition-opacity duration-500 ease-in-out"
+                                    style={{
+                                        opacity,
+                                        background: `radial-gradient(circle at ${position.x}px ${position.y}px, rgba(0, 229, 255, 0.15), transparent 80%)`,
+                                    }}
+                                />
+
+                                {/* Header for Popular Card */}
+                                {plan.isPopular ? (
+                                    <div className="relative h-24 overflow-hidden">
+                                        <img
+                                            src={plan.headerImage}
+                                            alt="header"
+                                            className="w-full h-full object-cover"
+                                        />
+                                        <div className="absolute inset-0 bg-black/40 backdrop-blur-[2px] flex items-center px-8">
+                                            <h3 className="text-xl font-bold text-white tracking-tight">
+                                                {plan.name}
+                                            </h3>
+                                        </div>
+                                    </div>
+                                ) : (
+                                    <div className="pt-8 px-8 pb-4">
+                                        <h3 className="text-xl font-bold text-neutral-900 tracking-tight">
                                             {plan.name}
                                         </h3>
                                     </div>
-                                </div>
-                            ) : (
-                                <div className="pt-8 px-8 pb-4">
-                                    <h3 className="text-xl font-bold text-neutral-900 tracking-tight">
-                                        {plan.name}
-                                    </h3>
-                                </div>
-                            )}
+                                )}
 
-                            {/* Card Content */}
-                            <div className="p-8 flex flex-col flex-grow">
-                                <p className="text-sm text-neutral-500 font-medium leading-[1.6] mb-8 min-h-[44px]">
-                                    {plan.description}
-                                </p>
+                                {/* Card Content */}
+                                <div className="p-8 flex flex-col flex-grow">
+                                    <p className="text-sm text-neutral-500 font-medium leading-[1.6] mb-8 min-h-[44px]">
+                                        {plan.description}
+                                    </p>
 
-                                {/* Pricing Box */}
-                                <div className="pricing">
-                                    <div className="flex items-baseline gap-1.5">
-                                        <span className="text-4xl font-black text-neutral-900 tracking-tighter">
-                                            Rp{plan.price}
-                                        </span>
+                                    {/* Pricing Box */}
+                                    <div className="pricing">
+                                        <div className="flex items-baseline gap-1.5">
+                                            <span className="text-4xl font-black text-neutral-900 tracking-tighter">
+                                                Rp{plan.price}
+                                            </span>
 
+                                        </div>
+
+                                        <motion.button
+                                            whileHover={{ scale: 1.02 }}
+                                            whileTap={{ scale: 0.98 }}
+                                            className={`w-full mt-6 py-4 px-6 rounded-full text-[13px] font-bold transition-all duration-300 cursor-pointer ${plan.name === "Studio"
+                                                ? "bg-black text-white hover:bg-neutral-800 shadow-lg shadow-black/10"
+                                                : "bg-neutral-200/50 text-neutral-600 hover:bg-neutral-200"
+                                                }`}
+                                        >
+                                            {plan.buttonText}
+                                        </motion.button>
                                     </div>
 
-                                    <motion.button
-                                        whileHover={{ scale: 1.02 }}
-                                        whileTap={{ scale: 0.98 }}
-                                        className={`w-full mt-6 py-4 px-6 rounded-full text-[13px] font-bold transition-all duration-300 cursor-pointer ${plan.name === "Studio"
-                                            ? "bg-black text-white hover:bg-neutral-800 shadow-lg shadow-black/10"
-                                            : "bg-neutral-200/50 text-neutral-600 hover:bg-neutral-200"
-                                            }`}
-                                    >
-                                        {plan.buttonText}
-                                    </motion.button>
+                                    {/* Features List */}
+                                    <ul className="space-y-4.5 mt-auto">
+                                        {plan.features.map((feature, i) => (
+                                            <li key={i} className="flex items-start gap-4 group">
+                                                <motion.div
+                                                    initial={{ scale: 0.8 }}
+                                                    whileInView={{ scale: 1 }}
+                                                    className="mt-1 flex-shrink-0"
+                                                >
+                                                    <CheckIcon />
+                                                </motion.div>
+                                                <span className="text-[13px] text-neutral-600 font-bold tracking-tight leading-tight group-hover:text-black transition-colors">
+                                                    {feature}
+                                                </span>
+                                            </li>
+                                        ))}
+                                    </ul>
                                 </div>
-
-                                {/* Features List */}
-                                <ul className="space-y-4.5 mt-auto">
-                                    {plan.features.map((feature, i) => (
-                                        <li key={i} className="flex items-start gap-4 group">
-                                            <motion.div
-                                                initial={{ scale: 0.8 }}
-                                                whileInView={{ scale: 1 }}
-                                                className="mt-1 flex-shrink-0"
-                                            >
-                                                <CheckIcon />
-                                            </motion.div>
-                                            <span className="text-[13px] text-neutral-600 font-bold tracking-tight leading-tight group-hover:text-black transition-colors">
-                                                {feature}
-                                            </span>
-                                        </li>
-                                    ))}
-                                </ul>
-                            </div>
-                        </motion.div>
-                    ))}
+                            </motion.div>
+                        );
+                    })}
                 </div>
             </div>
         </section>
