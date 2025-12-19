@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
-import Project1 from "../assets/project1.png";
-import Project2 from "../assets/project2.png";
+// import Project1 from "../assets/project1.png";
+// import Project2 from "../assets/project2.png";
 
 const Hero = () => {
     const containerVariants = {
@@ -161,7 +161,7 @@ const Hero = () => {
 
                 {/* Floating Stat Labels */}
                 <motion.div
-                    variants={itemVariants}
+                    variant s={itemVariants}
                     className="mt-20 pt-10 border-t border-neutral-100 flex flex-wrap justify-center gap-12 text-emerald-950"
                 >
                     <motion.div className="flex flex-col items-center">
