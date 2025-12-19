@@ -55,7 +55,7 @@ const ProductContent = ({ plan }) => (
                 {plan.buttonText}
             </motion.button>
         </div>
-        <div className="bg-white/5 rounded-[2rem] p-8 md:p-10 border border-white/5 flex flex-col justify-center">
+        <div className="bg-white/5 rounded-4xl p-8 md:p-10 border border-white/5 flex flex-col justify-center">
             <div className="flex items-center gap-3 mb-8">
                 <span className="text-[10px] font-black text-neutral-500 uppercase tracking-[0.2em]">Package Services</span>
                 <div className="h-px grow bg-white/10" />
@@ -63,7 +63,7 @@ const ProductContent = ({ plan }) => (
             <ul className="space-y-4">
                 {plan.features.map((feature, i) => (
                     <li key={i} className="flex items-start gap-4 group">
-                        <div className="mt-1 flex-shrink-0">
+                        <div className="mt-1 shrink-0">
                             <CheckIcon />
                         </div>
                         <span className="text-sm md:text-base text-neutral-300 font-bold tracking-tight leading-tight group-hover:text-white transition-colors">
@@ -218,7 +218,7 @@ const Product = () => {
                                         <ul className="space-y-4">
                                             {plan.features.map((feature, i) => (
                                                 <li key={i} className="flex items-start gap-3 group">
-                                                    <div className="mt-1 flex-shrink-0">
+                                                    <div className="mt-1 shrink-0">
                                                         <CheckIcon />
                                                     </div>
                                                     <span className="text-sm text-neutral-300 font-bold tracking-tight leading-tight group-hover:text-white transition-colors">
